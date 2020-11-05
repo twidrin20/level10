@@ -16,9 +16,12 @@ char ** loadDictionary(char *filename, int *size)
 	}
 	
 	// TODO
-	// Allocate memory for an array of strings.
+	// Allocate memory for an array of strings (arr).
 	// Read the dictionary line by line.
-	// Copy each line into the array of strings.
+	// Expand array if necessary (realloc).
+	// Allocate memory for the string (str).
+	// Copy each line into the string (use strcpy).
+	// Attach the string to the large array (assignment =).
 	
 	// The size should be the number of entries in the array.
 	*size = 0;
