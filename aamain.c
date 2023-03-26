@@ -2,26 +2,26 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "dictionary.h"
+#include "fileutil.h"
 
 
 int main(int argc, char *argv[])
 {
 	if (argc < 1)
 	{
-		fprintf(stderr, "Must supply a dictionary filename\n");
+		fprintf(stderr, "Must supply a text file name\n");
 		exit(1);
 	}
 	
-	int dlen;
-	char **d = loadDictionary(argv[1], &dlen);
+	int lineCount;
+	char **lines = loadFileAA(argv[1], &lineCount);
 	
-	printf("Dictionary loaded.\n");
+	printf("File loaded.\n");
 	
 	while(1)
 	{
 		char target[100];
-		printf("Word to search for: ");
+		printf("Text to search for: ");
 		fgets(target, 100, stdin);
 		
 		// Trim newline
@@ -30,11 +30,13 @@ int main(int argc, char *argv[])
 		
 		if (strcmp(target, "DONE") == 0) break;
 		
-		char *found = searchDictionary(target, d, dlen);
+		char *found = substringSearchAA(target, lines, lineCount);
 		if (found)
 			printf("Found: %s\n", found);
 		else
 			printf("Not found!\n");
 	}
+
+    freeAA(lines, lineCount);
 }
 
